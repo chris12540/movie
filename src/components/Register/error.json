@@ -1,0 +1,50 @@
+{
+	"config": {
+		"transformRequest": {},
+		"transformResponse": {},
+		"timeout": 0,
+		"xsrfCookieName": "XSRF-TOKEN",
+		"xsrfHeaderName": "X-XSRF-TOKEN",
+		"maxContentLength": -1,
+		"headers": {
+			"Accept": "application/json, text/plain, */*",
+			"Content-Type": "application/json;charset=utf-8"
+		},
+		"method": "post",
+		"url": "/auth/register",
+		"data": "{\"name\":\"Christian\",\"username\":\"chris\",\"password\":\"password\"}"
+	},
+	"request": {},
+	"response": {
+		"data": {
+			"message": "Username taken"
+		},
+		"status": 409,
+		"statusText": "Conflict",
+		"headers": {
+			"date": "Wed, 31 Oct 2018 19:18:42 GMT",
+			"etag": "W/\"1c-bqHPyMufGTZb0euhWapM3lOovdo\"",
+			"connection": "close",
+			"x-powered-by": "Express",
+			"content-length": "28",
+			"vary": "Accept-Encoding",
+			"content-type": "application/json; charset=utf-8"
+		},
+		"config": {
+			"transformRequest": {},
+			"transformResponse": {},
+			"timeout": 0,
+			"xsrfCookieName": "XSRF-TOKEN",
+			"xsrfHeaderName": "X-XSRF-TOKEN",
+			"maxContentLength": -1,
+			"headers": {
+				"Accept": "application/json, text/plain, */*",
+				"Content-Type": "application/json;charset=utf-8"
+			},
+			"method": "post",
+			"url": "/auth/register",
+			"data": "{\"name\":\"Christian\",\"username\":\"chris\",\"password\":\"password\"}"
+		},
+		"request": {}
+	}
+}

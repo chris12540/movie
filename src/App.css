@@ -1,3 +1,44 @@
+/* html {
+	overflow:hidden;
+	height:100%;
+}
+
 body {
+	height:100%;
+	overflow:auto;
+} */
+
+.App {
 	background: #111;
+	position: relative;
+	min-height: 100vh;
+	font-family: sans-serif;
+	color:white;
+}
+
+.App a {
+	text-decoration: none;
+}
+
+.none {
+	display:none;
+}
+
+.btn {
+	color: white;
+	padding: 10px 13px 7px 13px;
+	background: #555;
+	border-radius: 100px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.btn:active {
+	opacity: 0.5;
+}
+
+.no-focus-outline a:focus,
+.no-focus-outline button:focus,
+.no-focus-outline input:focus {
+	outline: none;
 }

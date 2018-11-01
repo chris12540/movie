@@ -1,0 +1,49 @@
+.nav-outer {
+	position: sticky;
+	top: 0px;
+	width: 100%;
+	height: 60px;
+	background: #464748;
+	padding: 7px;
+	z-index: 2;
+}
+
+.home-button {
+	height: 100%;
+}
+
+.home-button > img {
+	height: 100%;
+	margin-left: 5px;
+}
+
+nav {
+	max-width: 1000px;
+	margin: auto;
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.nav-login {
+	align-self: center;
+	margin-right: 15px;
+}
+
+.userInfo {
+	height:100%;
+	display:flex;
+}
+
+.userInfo > img {
+	height:100%;
+	border-radius: 50%;
+	background:#111;
+}
+
+@media (max-width: 600px) {
+	.nav-outer {
+		position: fixed;
+		top: calc(100vh - 60px);
+	}
+}

@@ -1,0 +1,29 @@
+.login {
+	height: calc(100vh - 60px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.login-inputs {
+	display: flex;
+	flex-direction: column;
+}
+
+.input {
+	margin: 15px 0;
+	padding: 10px;
+	font-size: 15px;
+	background: transparent;
+	border: 2px solid #555;
+	color: white;
+	text-align: center;
+}
+
+.input:focus {
+	border-color: #999;
+}
+
+.login-button {
+	margin: 10px 0 20px 0;
+}
