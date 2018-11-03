@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Logo from "../../images/Logo.svg";
 import { Link } from "react-router-dom";
+import './hamburgers.css'
 import "./nav.css";
 import Axios from 'axios';
 
@@ -10,7 +11,8 @@ class Nav extends Component {
 		this.state = {
 			name: '',
 			username: '',
-			profilePic: ''
+			profilePic: '',
+			isActive: false
 		}
 	}
 
@@ -39,7 +41,7 @@ class Nav extends Component {
 	}
 
 	render() {
-		const { name, username, profilePic } = this.state;
+		const { name, username, profilePic, isActive } = this.state;
 		return (
 			<div className="nav-outer">
 				<nav>
@@ -52,12 +54,17 @@ class Nav extends Component {
 							LOGIN
 					</Link>
 						:
-						<div className="userInfo">
-							<img className="profilePic" src={profilePic ? profilePic : ""} alt="" />
-							<h2 className="name">{name}</h2>
-							<p className="username">{username}</p>
-						</div>
+						<button onClick={() => { this.setState({ isActive: !isActive }) }} className={isActive ? "hamburger hamburger--squeeze is-active" : "hamburger hamburger--squeeze"} type="button">
+							<span className="hamburger-box">
+								<span className="hamburger-inner"></span>
+							</span>
+						</button>
 					}
+					<div className={isActive ? "userInfo slide" : "userInfo"}>
+						<img className="profilePic" src={profilePic ? profilePic : ""} alt="" />
+						<h2 className="name">{name}</h2>
+						<p className="username">{username}</p>
+					</div>
 				</nav>
 			</div>
 		);

@@ -10,33 +10,84 @@
 	position: fixed;
 	height:calc(100vh - 60px);
 	width:100vw;
-	display:flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	animation: fadeIn .2s ease;
+	perspective: 1000px;
+	animation: fadeIn .3s ease;
 }
 
 @keyframes fadeIn {
 	0% {
 		opacity: 0;
 	}
-
+	
 	100% {
 		opacity: 1;
 	}
 }
 
-.poster {
-	margin-bottom:40px;
+.rotate-card {
+	position: absolute;
+	background:#444;
+	border-bottom-left-radius:10px;
+	height:25px;
+	width:25px;
+	top:50px;
+	right:0px;
+	z-index: 1;
+	text-align: center;
+	line-height: 25px;
+	font-family: 'Fira Code';
 }
 
-.modal {
+.rotate {
+	transform:rotateY(-180deg);
+}
+
+.modal-rotate {
+	transition: transform 0.5s;
+	transform-style: preserve-3d;
 	width:300px;
+	margin:auto;
+	animation: first-rotate .9s ease-in-out;
+}
+
+@keyframes first-rotate {
+	0% {
+		transform:rotateY(0deg);
+	}
+	
+	40% {
+		transform:rotateY(0deg);
+	}
+	
+	100% {
+		transform:rotateY(-180deg);
+	}
+}
+
+.poster, .modal {
+	display: block;
+	position: absolute;
+	backface-visibility: hidden;
+	margin-top:50px;
+	top:0;
+}
+
+.poster {
+	width:100%;
+	box-shadow: 0 0 30px 2px #222;
+	animation: shrink 1.5s ease-out;
+}
+
+/* MODAL text */
+.modal {
+	width:100%;
+	height:450px;
 	background: #313131;
 	line-height: 20px;
-	padding:20px;
+	padding:50px 30px;
 	text-align: center;
+	box-shadow: 0 0 30px 2px #222;
+	transform: rotateY(180deg);
 }
 
 .modal > hr {
@@ -46,4 +97,39 @@
 
 .title {
 	font-size: 16pt;
+}
+
+.overview {
+	padding:10px;
+}
+
+.release-score {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding:0 20px;
+	margin-bottom:20px;
+}
+
+.release {
+	color:#bbb;
+}
+
+.score {
+	background:#ddd;
+	padding:5px 10px;
+	border-radius: 200px;
+	color:#666;
+}
+
+@media (min-width:600px) {
+	.modal {
+		height:600px;
+	}
+	.modal-rotate {
+		width:400px;
+	}
+	.poster {
+		animation:none;
+	}
 }

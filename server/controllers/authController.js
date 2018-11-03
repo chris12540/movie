@@ -8,7 +8,7 @@ module.exports = {
 	},
 	login: (req, res) => {
 		const { username, password } = req.body;
-		console.log(`Attempting to login with ${username} and ${password}`);
+		console.log(`Attempting to login ${username}`);
 		req.app
 			.get("db")
 			.find_user({ username })

@@ -41,17 +41,17 @@ class Register extends Component {
 						passwordsMatch: true,
 						filledOut: true
 					})
-					window.history.push('/');
+					window.location = '/';
 				}
 			}).catch(error => {
-				if (error.response.status === 409 && error.response.data.message === "Username taken") {
+				console.log(error);
+				if (error.response.data.message === "Username taken") {
 					this.setState({
 						usernameTaken: true,
 						passwordsMatch: true,
 						filledOut: true
 					})
 				}
-				console.log(JSON.stringify(error.response.data.message));
 			})
 		} else {
 			this.setState({

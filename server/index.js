@@ -7,7 +7,10 @@ require("dotenv").config();
 const authController = require("./controllers/authController");
 
 const app = express();
-app.use( express.static( `${__dirname}/../build` ) );
+
+// Use for built app
+// app.use( express.static( `${__dirname}/../build` ) );
+
 app.use(bodyParser.json());
 
 app.use(

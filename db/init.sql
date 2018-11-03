@@ -2,8 +2,10 @@ CREATE EXTENSION citext;
 
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
-	name CITEXT NOT NULL,
-	username TEXT UNIQUE NOT NULL,
+	name TEXT NOT NULL,
+	username CITEXT UNIQUE NOT NULL,
 	password TEXT NOT NULL,
 	profile_pic TEXT NOT NULL
 );
+
+CREATE TABLE lists 
