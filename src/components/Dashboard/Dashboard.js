@@ -7,11 +7,11 @@ class Dashboard extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			authorized: false,
 			list: [],
 			page: 1,
 			item: {},
-			showModal: false
+			showModal: false,
+			userLists: []
 		};
 	}
 
@@ -45,6 +45,11 @@ class Dashboard extends Component {
 
 	componentDidMount() {
 		this.request("movie", "upcoming", this.state.page);
+		Axios.get('/api/userLists').then(lists => {
+			this.setState({
+				userLists: lists.data
+			});
+		})
 	}
 
 	render() {
@@ -67,7 +72,7 @@ class Dashboard extends Component {
 		return (
 			<div className="dashboard">
 				{list}
-				{!this.state.showModal || <Modal closeModal={this.closeModal} item={this.state.item} />}
+				{!this.state.showModal || <Modal closeModal={this.closeModal} item={this.state.item} userLists={this.state.userLists} />}
 			</div>
 		)
 	}

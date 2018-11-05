@@ -15,26 +15,7 @@ class Modal extends Component {
 			score: props.item.vote_average,
 			showPoster: false,
 			videoId: '',
-			userLists: [
-				{
-					id: 1,
-					name: 'My List',
-					list: [
-						{
-							id: 200,
-							poster_path: '/ahasdfarraeh',
-							title: 'Raplh Breaks the Internet',
-							overview: '',
-							release: '2018-11-21',
-							score: 0
-						}
-					]
-				},
-				{
-					id: 2,
-					name: 'Our List'
-				}
-			]
+			userLists: props.userLists
 		}
 	}
 
@@ -53,8 +34,15 @@ class Modal extends Component {
 				overview: this.props.item.overview,
 				release: this.props.item.release_date,
 				score: this.props.item.vote_average,
+				userLists: this.props.userLists
 			})
 		}
+	}
+
+	addToList = () => {
+		const lists = document.getElementById('lists')
+		const list = lists.options[lists.selectedIndex].value;
+		Axios.post('/api/addToList', { listId: list, ...this.props.item })
 	}
 
 	componentDidMount() {
@@ -62,24 +50,24 @@ class Modal extends Component {
 		Axios.get(`https://www.googleapis.com/youtube/v3/search?part=id&q=${query}%20Trailer&maxResults=1&key=${process.env.REACT_APP_KEY}`).then(res => {
 			this.setState({ videoId: res.data.items[0].id.videoId });
 		})
+
 	}
 
 	render() {
 		const { id, poster, title, overview, release, score, showPoster, videoId } = this.state;
-		console.log(this.state.title);
 		const userLists = this.state.userLists.map(list => {
-			return <option value={list.name}>{list.name}</option>
+			return <option key={list.id} value={list.id}>{list.name}</option>
 		})
 		const length = 200;
 		return (
-			<div className="modal-container">
+			<div className={`modal-container ${id}`}>
 				<div onClick={this.props.closeModal} className="modal-background"></div>
 				<div className={showPoster ? 'modal-rotate' : "modal-rotate rotate"} >
 					<div className="rotate-card" onClick={this.rotateCard}> -> </div>
 					<img src={`http://image.tmdb.org/t/p/w300${poster}`} alt="" className='poster' />
 					<div className='modal'>
 						{videoId ?
-							<div className="resp-container"><iframe className="resp-iframe" src={`https://www.youtube.com/embed/${videoId}`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe></div>
+							<div className="resp-container"><iframe title="trailer" className="resp-iframe" src={`https://www.youtube.com/embed/${videoId}`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe></div>
 							: ''
 						}
 						<h1 className="title">{title}</h1>
@@ -91,10 +79,10 @@ class Modal extends Component {
 						</div>
 						{userLists.length ?
 							<div className="add-to-list">
-								<select name="lists" id="">
+								<select name="lists" id="lists">
 									{userLists}
 								</select>
-								<button className="add">+</button>
+								<button onClick={this.addToList} className="add">+</button>
 							</div>
 							: <Link to="/login" className="btn">Login to add to a list</Link>}
 					</div>

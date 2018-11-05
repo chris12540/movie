@@ -5,6 +5,7 @@ const session = require("express-session");
 require("dotenv").config();
 
 const authController = require("./controllers/authController");
+const listController = require('./controllers/listController');
 
 const app = express();
 
@@ -29,6 +30,9 @@ app.post("/auth/login", authController.login);
 app.post("/auth/register", authController.register);
 app.get('/auth/me', authController.me);
 app.post('/auth/logout', authController.logout);
+
+app.get('/api/userLists', listController.userLists);
+app.post('/api/addToList', listController.addToList);
 
 const PORT = process.env.SERVER_PORT || 25565;
 app.listen(PORT, () => {

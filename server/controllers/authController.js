@@ -3,21 +3,17 @@ const saltRounds = 12;
 
 module.exports = {
 	me: (req, res) => {
-		console.log('req.session.user', req.session.user)
 		res.json(req.session.user);
 	},
 	login: (req, res) => {
 		const { username, password } = req.body;
-		console.log(`Attempting to login ${username}`);
 		req.app
 			.get("db")
 			.find_user({ username })
 			.then(users => {
 				if (users.length) {
-					console.log(`Found user ${username}`)
 					bcrypt.compare(password, users[0].password).then(passwordsMatch => {
 						if (passwordsMatch) {
-							console.log(`Password ${password} is correct`)
 							const { name, username, profile_pic: profilePic } = users[0];
 							req.session.user = { name, username, profilePic };
 							console.log(`Added user ${username} to session: ${req.session.user.username}`)
@@ -49,10 +45,12 @@ module.exports = {
 				bcrypt.hash(password, saltRounds).then(password => {
 					const profilePic = `https://robohash.org/${username}`
 					req.app.get('db').create_user({ name, username, password, profilePic })
-						.then(() => {
-							console.log('register');
-							req.session.user = { name, username, profilePic };
-							res.json({ ...req.session.user })
+						.then(users => {
+							req.app.get('db').init_user_list({ id: users[0].id }).then(() => {
+								console.log('register ');
+								req.session.user = { name, username, profilePic };
+								res.json({ ...req.session.user })
+							})
 						})
 						.catch(error => {
 							console.log("error", error);

@@ -31,6 +31,7 @@ class Auth extends Component {
 						}}
 						type="text"
 						className="input"
+						autoFocus
 					/>
 					<input
 						onKeyPress={e => { e.key === 'Enter' && this.login() }}

@@ -67,7 +67,7 @@ class Register extends Component {
 			<div className="register">
 				<div className="register-inner">
 					<p className={!filledOut ? "filledOut" : "none"}>Fill out all fields</p>
-					<input value={name} onChange={e => { this.update('name', e.target.value) }} placeholder="Name" type="text" className="input" />
+					<input value={name} onChange={e => { this.update('name', e.target.value) }} placeholder="Name" type="text" className="input" autoFocus />
 					<input value={username} onChange={e => { this.update('username', e.target.value) }} placeholder="Username" type="text" className="input" />
 					<p className={usernameTaken ? "usernameTaken" : "none"}>Username taken</p>
 					<input value={password} onChange={e => { this.update('password', e.target.value) }} placeholder="Password" type="password" className="input" />
