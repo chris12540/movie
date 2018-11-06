@@ -45,27 +45,32 @@ class Nav extends Component {
 		return (
 			<div className="nav-outer">
 				<nav>
-					<Link to="/" className="home-button">
-						<img src={Logo} height="100px" alt="" />
+					<div className="nav-inner">
+						<Link to="/" className="home-button">
+							<img src={Logo} height="100px" alt="" />
+						</Link>
+						<Link to='/lists' className="nav-links"><i className="fas fa-list-ul"></i></Link>
+						{!username ?
+							<Link to="/login" className="btn nav-login">
+								LOGIN
 					</Link>
-					{username ? <div onClick={this.logout} className="logout">LOGOUT</div> : ""}
-					{!username ?
-						<Link to="/login" className="btn nav-login">
-							LOGIN
-					</Link>
-						:
-						<button onClick={() => { this.setState({ isActive: !isActive }) }} className={isActive ? "hamburger hamburger--squeeze is-active" : "hamburger hamburger--squeeze"} type="button">
-							<span className="hamburger-box">
-								<span className="hamburger-inner"></span>
-							</span>
-						</button>
-					}
-					<div className={isActive ? "userInfo slide" : "userInfo"}>
+							:
+							<button onClick={() => { this.setState({ isActive: !isActive }) }} className={isActive ? "hamburger hamburger--squeeze is-active" : "hamburger hamburger--squeeze"} type="button">
+								<span className="hamburger-box">
+									<span className="hamburger-inner"></span>
+								</span>
+							</button>
+						}
+					</div>
+				</nav>
+				<div className={isActive ? "userInfo slide" : "userInfo"}>
+					<div className="userInfo-inner">
 						<img className="profilePic" src={profilePic ? profilePic : ""} alt="" />
 						<h2 className="name">{name}</h2>
 						<p className="username">{username}</p>
+						{username ? <div onClick={this.logout} className="logout">LOGOUT</div> : ""}
 					</div>
-				</nav>
+				</div>
 			</div>
 		);
 	}

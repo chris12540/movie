@@ -8,6 +8,7 @@ export default (
 	<Switch>
 		<Route path="/login" component={Login} />
 		<Route path="/register" component={Register} />
+		<Route path="/lists" component={Register} />
 		<Route path="/" component={Dashboard} />
 	</Switch>
 );
