@@ -45,7 +45,7 @@ class Dashboard extends Component {
 
 	componentDidMount() {
 		this.request("movie", "upcoming", this.state.page);
-		Axios.get('/api/userLists').then(lists => {
+		Axios.get('/api/lists').then(lists => {
 			this.setState({
 				userLists: lists.data
 			});

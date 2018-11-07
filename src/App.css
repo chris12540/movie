@@ -8,12 +8,18 @@ body {
 	overflow:auto;
 } */
 
+html {
+	background:#202020;
+}
+
 .App {
-	background: #111;
+	background: #202020;
 	position: relative;
 	min-height: 100vh;
+	min-width: 100vw;
 	font-family: sans-serif;
 	color:white;
+	float: left;
 }
 
 .App a {

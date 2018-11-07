@@ -16,6 +16,7 @@ CREATE TABLE lists (
 
 CREATE TABLE list_items (
 	id SERIAL PRIMARY KEY,
+	media_id INTEGER NOT NULL,
 	title TEXT NOT NULL,
 	overview TEXT NOT NULL,
 	release_date TEXT NOT NULL,

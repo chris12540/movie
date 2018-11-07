@@ -42,7 +42,7 @@ class Modal extends Component {
 	addToList = () => {
 		const lists = document.getElementById('lists')
 		const list = lists.options[lists.selectedIndex].value;
-		Axios.post('/api/addToList', { listId: list, ...this.props.item })
+		Axios.post(`/api/lists/${list}`, { listId: list, ...this.props.item })
 	}
 
 	componentDidMount() {

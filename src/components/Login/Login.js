@@ -14,8 +14,10 @@ class Auth extends Component {
 
 	login = () => {
 		const { username, password } = this.state;
-		Axios.post('/auth/login', { username, password }).then(() => {
+		Axios.post('/auth/login', { username, password }).then(res => {
 			window.location.pathname = '/';
+		}).catch(error => {
+			console.log(error.response.data.message)
 		})
 	};
 

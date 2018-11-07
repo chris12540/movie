@@ -33,8 +33,15 @@ nav {
 	margin-left: 5px;
 }
 
+.menu {
+	display:flex;
+	justify-content:space-between;
+	align-items: center;
+	height:100%;
+	width:150px;
+}
+
 .nav-links {
-	position: absolute;
 	color:white;
 	right:100px;
 	top:13px;
@@ -61,7 +68,7 @@ nav {
 	left:0;
 	z-index: -1;
 	background:#3b3b3b;
-	transition: transform .3s;
+	transition: transform .25s;
 }
 
 .userInfo-inner > img {
@@ -75,7 +82,7 @@ nav {
 	max-width:1000px;
 	margin:auto;
 	display:flex;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	align-items: center;
 	padding:7px;
 }

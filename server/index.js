@@ -18,7 +18,8 @@ app.use(
 	session({
 		secret: process.env.SESSION_SECRET,
 		resave: false,
-		saveUninitialized: true
+		saveUninitialized: true,
+		cookie: { maxAge: 1000 * 60 * 60 }
 	})
 );
 
@@ -31,8 +32,12 @@ app.post("/auth/register", authController.register);
 app.get('/auth/me', authController.me);
 app.post('/auth/logout', authController.logout);
 
+app.get('/api/lists', listController.lists);
 app.get('/api/userLists', listController.userLists);
-app.post('/api/addToList', listController.addToList);
+app.post('/api/lists', listController.addList);
+app.post('/api/lists/:id', listController.addToList);
+app.delete('/api/lists/:id', listController.deleteList);
+app.delete('/api/lists/media/:id', listController.deleteMedia);
 
 const PORT = process.env.SERVER_PORT || 25565;
 app.listen(PORT, () => {
