@@ -18,7 +18,6 @@ class Lists extends Component {
 
 	getLists = () => {
 		Axios.get('/api/userLists').then(res => {
-			console.log(res)
 			const groupedLists = groupBy(res.data, 'name');
 			this.setState({
 				lists: groupedLists
@@ -48,7 +47,7 @@ class Lists extends Component {
 	}
 
 	addList = () => {
-		const { listName, lists } = this.state
+		const { listName } = this.state
 		Axios.post('/api/lists', { listName }).then(res => {
 			if (res.status === 201) {
 				this.setState({
@@ -64,33 +63,31 @@ class Lists extends Component {
 		const { lists, addList } = this.state;
 		const userLists = [];
 		for (let list in lists) {
-			{
-				lists[list][0].title !== null ?
-					userLists.push(
-						<div className="list-container">
-							<h1 className="list-title">{list} {list !== 'My List' && <i className="delete-list fas fa-trash-alt" onClick={() => this.deleteList(lists[list][0].list_id)}></i>}</h1>
-							<div className="list">
-								{lists[list].map(media => {
-									return (
-										<div className="movie">
-											<img src={`https://image.tmdb.org/t/p/w185${media.poster_path}`} alt="" />
-											<i className="delete-movie fas fa-trash-alt" onClick={() => this.deleteMovie(media.id)}></i>
-										</div>
-									)
-								})}
-							</div>
+			lists[list][0].title !== null ?
+				userLists.push(
+					<div key={lists[list][0].list_id} className="list-container">
+						<h1 className="list-title"><span onClick={() => { }}>{list}</span> {list !== 'My List' && <i className="delete-list fas fa-trash-alt" onClick={() => this.deleteList(lists[list][0].list_id)}></i>}</h1>
+						<div className="list">
+							{lists[list].map(media => {
+								return (
+									<div key={media.id} className="movie">
+										<img src={`https://image.tmdb.org/t/p/w185${media.poster_path}`} alt="" />
+										<i className="delete-movie fas fa-trash-alt" onClick={() => this.deleteMovie(media.id)}></i>
+									</div>
+								)
+							})}
 						</div>
-					)
-					:
-					userLists.push(
-						<div className="list-container">
-							<h1>{list} {list !== 'My List' && <i className="delete-list fas fa-trash-alt" onClick={() => this.deleteList(lists[list][0].list_id)}></i>}</h1>
-							<div className="list">
-								<Link to='/'><img src={addMovie} alt="" /></Link>
-							</div>
+					</div>
+				)
+				:
+				userLists.push(
+					<div key={lists[list][0].list_id} className="list-container">
+						<h1>{list} {list !== 'My List' && <i className="delete-list fas fa-trash-alt" onClick={() => this.deleteList(lists[list][0].list_id)}></i>}</h1>
+						<div className="list">
+							<Link to='/'><img src={addMovie} alt="" /></Link>
 						</div>
-					)
-			}
+					</div>
+				)
 		}
 		return (
 			<div className="lists">

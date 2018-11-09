@@ -1,6 +1,6 @@
 .dashboard {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
 	/* justify-items:  */
 	padding: 15px;
 	gap: 15px;

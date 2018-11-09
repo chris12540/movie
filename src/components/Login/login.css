@@ -27,3 +27,12 @@
 .login-button {
 	margin: 10px 0 20px 0;
 }
+
+.login-error {
+	position: absolute;
+	width:300px;
+	left:50%;
+	transform: translate(-50%, -20px);
+	text-align: center;
+	color:crimson;
+}

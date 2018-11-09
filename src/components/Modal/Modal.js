@@ -34,15 +34,31 @@ class Modal extends Component {
 				overview: this.props.item.overview,
 				release: this.props.item.release_date,
 				score: this.props.item.vote_average,
-				userLists: this.props.userLists
+				userLists: this.props.userLists,
+				added: false
 			})
 		}
 	}
 
+	added = () => {
+		this.setState({
+			added: true
+		})
+	}
+
 	addToList = () => {
+		const list = this.getSelection('value');
+		Axios.post(`/api/lists/${list}`, { listId: list, ...this.props.item }).then(res => {
+			res.status === 201 &&
+				this.added();
+		})
+	}
+
+	getSelection = (type) => {
 		const lists = document.getElementById('lists')
-		const list = lists.options[lists.selectedIndex].value;
-		Axios.post(`/api/lists/${list}`, { listId: list, ...this.props.item })
+		return type === 'value' ? lists.options[lists.selectedIndex].value
+			: type === 'name' ? lists.options[lists.selectedIndex].text
+				: "";
 	}
 
 	componentDidMount() {
@@ -54,13 +70,13 @@ class Modal extends Component {
 	}
 
 	render() {
-		const { id, poster, title, overview, release, score, showPoster, videoId } = this.state;
+		const { id, poster, title, overview, release, score, showPoster, videoId, added } = this.state;
 		const userLists = this.state.userLists.map(list => {
-			return <option key={list.id} value={list.id}>{list.name}</option>
+			return <option key={list.id} name={list.name} value={list.id}>{list.name}</option>
 		})
-		const length = 200;
 		return (
 			<div className={`modal-container ${id}`}>
+				{/* <button onClick={this.added}>added</button> */}
 				<div onClick={this.props.closeModal} className="modal-background"></div>
 				<div className={showPoster ? 'modal-rotate' : "modal-rotate rotate"} >
 					<div className="rotate-card" onClick={this.rotateCard}> -> </div>
@@ -71,8 +87,7 @@ class Modal extends Component {
 							: ''
 						}
 						<h1 className="title">{title}</h1>
-						<hr />
-						<p className="overview">{window.screen.width < 600 && overview.length > length ? overview.substring(0, length) + "..." : overview}</p>
+						<p className="overview">{overview}</p>
 						<div className="release-score">
 							<p className="release">{release}</p>
 							<p className="score">{score}</p>
@@ -82,11 +97,14 @@ class Modal extends Component {
 								<select name="lists" id="lists">
 									{userLists}
 								</select>
-								<button onClick={this.addToList} className="add">+</button>
+								<button onClick={this.addToList} className="add">Add</button>
 							</div>
 							: <Link to="/login" className="btn">Login to add to a list</Link>}
 					</div>
 				</div>
+				{added && <div className="added">
+					<h1>{title} Added To {this.getSelection('name')}</h1>
+				</div>}
 			</div>
 		);
 	}

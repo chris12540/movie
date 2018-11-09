@@ -1,0 +1,39 @@
+.profile {
+	max-width:1000px;
+	margin:auto;
+	display:flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.profile > * {
+	margin-top:20px;
+}
+
+.profile > img {
+	
+	background:#111;
+	border-radius: 10%;
+}
+
+.profile > h1 {
+
+}
+
+.profile > h2 {
+
+}
+
+.upload > div {
+	height:50px !important;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* .upload p {
+	text-align: center;
+	height:100%;
+	width:100%;
+} */

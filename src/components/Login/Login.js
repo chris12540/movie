@@ -8,7 +8,8 @@ class Auth extends Component {
 		super(props);
 		this.state = {
 			username: "",
-			password: ""
+			password: "",
+			error: ""
 		};
 	}
 
@@ -17,14 +18,16 @@ class Auth extends Component {
 		Axios.post('/auth/login', { username, password }).then(res => {
 			window.location.pathname = '/';
 		}).catch(error => {
-			console.log(error.response.data.message)
+			this.setState({ error: error.response.data.message })
 		})
 	};
 
 	render() {
+		const { error } = this.state;
 		return (
 			<div className="login">
 				<div className="login-inputs">
+					{error && <h1 className="login-error">{error}</h1>}
 					<input
 						onKeyPress={e => { e.key === 'Enter' && this.login() }}
 						placeholder="Username"
