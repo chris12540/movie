@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import './modal.css';
 import Axios from 'axios';
+import img from '../../images/img.svg';
 
 class Modal extends Component {
 	constructor(props) {
@@ -60,6 +61,7 @@ class Modal extends Component {
 			: type === 'name' ? lists.options[lists.selectedIndex].text
 				: "";
 	}
+
 
 	componentDidMount() {
 		const query = encodeURI(this.state.title);

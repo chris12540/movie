@@ -8,6 +8,25 @@
 
 .card {
 	width: 100%;
+	height:100%;
+	background:#111;
+}
+
+.search, .filter {
+	position: fixed;
+	bottom:85px;
+	right:25px;
+	background:firebrick;
+	padding:15px;
+	border-radius: 50%;
+}
+
+.search {
+
+}
+
+.filter {
+
 }
 
 @media (max-width: 600px) {

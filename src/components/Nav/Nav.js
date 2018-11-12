@@ -70,7 +70,7 @@ class Nav extends Component {
 				<div className={isActive ? "userInfo slide" : "userInfo"}>
 					<div className="userInfo-inner">
 						<Link to='/profile'>
-							<img onClick={() => { setTimeout(() => this.setState({ isActive: false }), 100) }} aclassName="profilePic" src={profilePic ? profilePic : ""} alt="" />
+							<img onClick={() => { setTimeout(() => this.setState({ isActive: false }), 100) }} className="profilePic" src={profilePic ? profilePic : ""} alt="" />
 						</Link>
 						{/* <h2 className="name">{name}</h2> */}
 						{/* <p className="username">{username}</p> */}
