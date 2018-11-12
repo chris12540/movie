@@ -107,6 +107,9 @@ class Dashboard extends Component {
 			<div className="dashboard">
 				{list}
 				{!this.state.showModal || <Modal closeModal={this.closeModal} item={this.state.item} userLists={this.state.userLists} />}
+				{/* <button onClick={() => { this.filter(popular) }}>popular</button>
+				<button onClick={() => { this.filter(upcoming) }}>upcoming</button>
+				<button onClick={() => { this.filter(popular) }}>popular</button> */}
 				<div onClick={this.filter} className="search"><i className="icon fas fa-filter"></i></div>
 				<div onClick={this.search} className="search"><i className="icon fab fa-sistrix"></i></div>
 			</div>
