@@ -12,6 +12,7 @@ class Dashboard extends Component {
 			page: 1,
 			item: {},
 			showModal: false,
+			showSearch: false,
 			userLists: [],
 			filter: 'upcoming'
 		};
@@ -43,9 +44,12 @@ class Dashboard extends Component {
 		).then(res => res.data)
 	}
 
-	search = () => {
-		this.setState({
-
+	search = e => {
+		Axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${e.target.value}&page=1`).then(res => {
+			this.setState({
+				list: res.data.results,
+				showSearch: false
+			})
 		})
 	}
 
@@ -103,15 +107,18 @@ class Dashboard extends Component {
 		) : (
 				<h1>Loading...</h1>
 			);
+		const { showModal, item, userLists, showSearch } = this.state;
 		return (
 			<div className="dashboard">
 				{list}
-				{!this.state.showModal || <Modal closeModal={this.closeModal} item={this.state.item} userLists={this.state.userLists} />}
+				{!showModal || <Modal closeModal={this.closeModal} item={item} userLists={userLists} />}
 				{/* <button onClick={() => { this.filter(popular) }}>popular</button>
 				<button onClick={() => { this.filter(upcoming) }}>upcoming</button>
-				<button onClick={() => { this.filter(popular) }}>popular</button> */}
-				<div onClick={this.filter} className="search"><i className="icon fas fa-filter"></i></div>
-				<div onClick={this.search} className="search"><i className="icon fab fa-sistrix"></i></div>
+			<button onClick={() => { this.filter(popular) }}>popular</button> */}
+				{/* https://res.cloudinary.com/djrk8ejp8/image/upload/v1541796767/kvz3k3m8owextvqwosto.jpg */}
+				{showSearch && <input onKeyPress={e => { e.key === 'Enter' && this.search(e) }} type="text" autoFocus onBlur={() => { this.setState({ showSearch: false }) }} className="search-input" />}
+				<div onClick={() => { this.setState({ showSearch: !showSearch }) }} className="search"><i className="icon fab fa-sistrix"></i></div>
+				<div onClick={this.filter} className="filter"><i className="icon fas fa-filter"></i></div>
 			</div>
 		)
 	}

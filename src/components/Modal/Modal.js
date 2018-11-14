@@ -14,9 +14,9 @@ class Modal extends Component {
 			overview: props.item.overview,
 			release: props.item.release_date,
 			score: props.item.vote_average,
-			showPoster: false,
 			videoId: '',
-			userLists: props.userLists
+			userLists: props.userLists,
+			showPoster: false
 		}
 	}
 
@@ -26,20 +26,20 @@ class Modal extends Component {
 		})
 	}
 
-	componentDidUpdate(prevProps) {
-		if (prevProps.item.id !== this.props.item.id) {
-			this.setState({
-				id: this.props.item.id,
-				poster: this.props.item.poster_path,
-				title: this.props.item.title,
-				overview: this.props.item.overview,
-				release: this.props.item.release_date,
-				score: this.props.item.vote_average,
-				userLists: this.props.userLists,
-				added: false
-			})
-		}
-	}
+	// componentDidUpdate(prevProps) {
+	// 	if (prevProps.item.id !== this.props.item.id) {
+	// 		this.setState({
+	// 			id: this.props.item.id,
+	// 			poster: this.props.item.poster_path,
+	// 			title: this.props.item.title,
+	// 			overview: this.props.item.overview,
+	// 			release: this.props.item.release_date,
+	// 			score: this.props.item.vote_average,
+	// 			userLists: this.props.userLists,
+	// 			added: false
+	// 		})
+	// 	}
+	// }
 
 	added = () => {
 		this.setState({

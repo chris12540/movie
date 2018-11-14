@@ -1,16 +1,17 @@
 .modal-background {
 	position: fixed;
 	height: 100vh;
-	width:110vw;
+	width: 120vw;
 	background:rgba(0,0,0,.5);
 	z-index: 0;
-	transform: translateZ(-100px) translate(-30px, -30px);
+	transform: translateZ(-100px) translate(-50px, -30px);
 }
 
 .modal-container {
 	position: fixed;
-	height:calc(100vh - 60px);
-	width:100vw;
+	left:0;
+	height:calc(100% - 60px);
+	width:100%;
 	perspective: 2000px;
 	animation: fadeIn .3s ease;
 }
