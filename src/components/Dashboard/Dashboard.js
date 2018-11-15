@@ -13,6 +13,7 @@ class Dashboard extends Component {
 			item: {},
 			showModal: false,
 			showSearch: false,
+			showFilter: false,
 			userLists: [],
 			filter: 'upcoming'
 		};
@@ -49,6 +50,19 @@ class Dashboard extends Component {
 			this.setState({
 				list: res.data.results,
 				showSearch: false
+			})
+		})
+	}
+
+	filter(filter, page) {
+		Axios.get(
+			`https://api.themoviedb.org/3/movie/${filter}?api_key=${
+			process.env.REACT_APP_API_KEY
+			}&page=${page}&region=US`
+		).then(res => {
+			this.setState({
+				list: res.data.results,
+				filter
 			})
 		})
 	}
@@ -107,19 +121,22 @@ class Dashboard extends Component {
 		) : (
 				<h1>Loading...</h1>
 			);
-		const { showModal, item, userLists, showSearch } = this.state;
+		const { showModal, item, userLists, showSearch, showFilter } = this.state;
 		return (
 			<div className="dashboard">
 				{list}
 				{!showModal || <Modal closeModal={this.closeModal} item={item} userLists={userLists} />}
-				{/* <button onClick={() => { this.filter(popular) }}>popular</button>
-				<button onClick={() => { this.filter(upcoming) }}>upcoming</button>
-			<button onClick={() => { this.filter(popular) }}>popular</button> */}
+				<div className={showFilter ? "filter-buttons show-filter" : "filter-buttons"}>
+					<button onClick={() => { this.filter('popular') }}>Popular</button>
+					<button onClick={() => { this.filter('upcoming') }}>Upcoming</button>
+					<button onClick={() => { this.filter('top_rated') }}>Top Rated</button>
+					<button onClick={() => { this.filter('now_playing') }}>Now Playing</button>
+				</div>
 				{/* https://res.cloudinary.com/djrk8ejp8/image/upload/v1541796767/kvz3k3m8owextvqwosto.jpg */}
 				{showSearch && <input onKeyPress={e => { e.key === 'Enter' && this.search(e) }} type="text" autoFocus onBlur={() => { this.setState({ showSearch: false }) }} className="search-input" />}
-				<div onClick={() => { this.setState({ showSearch: !showSearch }) }} className="search"><i className="icon fab fa-sistrix"></i></div>
-				<div onClick={this.filter} className="filter"><i className="icon fas fa-filter"></i></div>
-			</div>
+				{showSearch || <div onClick={() => { this.setState({ showSearch: !showSearch }) }} className="search"><i className="icon fab fa-sistrix"></i></div>}
+				<div onClick={() => { this.setState({ showFilter: !showFilter }) }} className="filter"><i className="icon fas fa-filter"></i></div>
+			</div >
 		)
 	}
 }
