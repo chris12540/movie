@@ -7,7 +7,7 @@
 
 .list-container {
 	position: relative;
-	width:100vw;
+	width:100%;
 }
 
 .list-container > h1 {
@@ -19,7 +19,7 @@
 	padding: 0 20px;
 	display:flex;
 	flex-wrap: nowrap;
-	overflow-x: scroll;
+	overflow-x: auto;
 	overflow-y: hidden;
 }
 

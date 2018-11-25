@@ -82,7 +82,10 @@ class Modal extends Component {
 				<div onClick={this.props.closeModal} className="modal-background"></div>
 				<div className={showPoster ? 'modal-rotate' : "modal-rotate rotate"} >
 					<div className="rotate-card" onClick={this.rotateCard}> -> </div>
-					<img src={`http://image.tmdb.org/t/p/w300${poster}`} alt="" className='poster' />
+					{poster ? <img src={`http://image.tmdb.org/t/p/w300${poster}`} alt="Poster" className='poster' />
+						:
+						<img src={img} alt="No Poster" className="poster" />
+					}
 					<div className='modal'>
 						{videoId ?
 							<div className="resp-container"><iframe title="trailer" className="resp-iframe" src={`https://www.youtube.com/embed/${videoId}`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe></div>

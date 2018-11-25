@@ -3,6 +3,7 @@ import Axios from "axios";
 import "./dashboard.css";
 import Modal from '../Modal/Modal';
 import img from '../../images/img.svg';
+import filter from '../../images/filter.svg';
 
 class Dashboard extends Component {
 	constructor(props) {
@@ -54,17 +55,29 @@ class Dashboard extends Component {
 		})
 	}
 
-	filter(filter, page) {
-		Axios.get(
-			`https://api.themoviedb.org/3/movie/${filter}?api_key=${
-			process.env.REACT_APP_API_KEY
-			}&page=${page}&region=US`
-		).then(res => {
+	filter(filter) {
+		// Axios.get(
+		// 	`https://api.themoviedb.org/3/movie/${filter}?api_key=${
+		// 	process.env.REACT_APP_API_KEY
+		// 	}&page=${page}&region=US`
+		// ).then(res => {
+		// 	this.setState({
+		// 		list: res.data.results,
+		// 		filter,
+		// 		showFilter: false
+		// 	})
+		// })
+		window.scrollTo(0, 0);
+		Axios.all([this.request(filter, 1), this.request(filter, 2)]).then(res => {
+			console.log(res)
+			let list = [...res[0].results, ...res[1].results];
 			this.setState({
-				list: res.data.results,
-				filter
+				filter,
+				list: list,
+				page: 3,
+				showFilter: false
 			})
-		})
+		});
 	}
 
 	showModal = id => {
@@ -84,8 +97,8 @@ class Dashboard extends Component {
 	}
 
 	populate = () => {
-		const { filter } = this.state;
-		Axios.all([this.request(filter, this.state.page), this.request(filter, this.state.page + 1)]).then(res => {
+		const { filter, page } = this.state;
+		Axios.all([this.request(filter, page), this.request(filter, page + 1)]).then(res => {
 			console.log(res)
 			let list = [...res[0].results, ...res[1].results];
 			this.setState({
@@ -135,7 +148,7 @@ class Dashboard extends Component {
 				{/* https://res.cloudinary.com/djrk8ejp8/image/upload/v1541796767/kvz3k3m8owextvqwosto.jpg */}
 				{showSearch && <input onKeyPress={e => { e.key === 'Enter' && this.search(e) }} type="text" autoFocus onBlur={() => { this.setState({ showSearch: false }) }} className="search-input" />}
 				{showSearch || <div onClick={() => { this.setState({ showSearch: !showSearch }) }} className="search"><i className="icon fab fa-sistrix"></i></div>}
-				<div onClick={() => { this.setState({ showFilter: !showFilter }) }} className="filter"><i className="icon fas fa-filter"></i></div>
+				<div onClick={() => { this.setState({ showFilter: !showFilter }) }} className="filter"><img src={filter} alt="Filter" /></div>
 			</div >
 		)
 	}

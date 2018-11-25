@@ -41,10 +41,11 @@ class Nav extends Component {
 				})
 			}
 		})
+		window.location.replace("/");
 	}
 
 	render() {
-		const { name, username, profilePic, isActive } = this.state;
+		const { username, profilePic, isActive } = this.state;
 		return (
 			<div className="nav-outer">
 				<nav>
