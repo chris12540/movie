@@ -10,7 +10,7 @@ const listController = require('./controllers/listController');
 const app = express();
 
 // Use for built app
-// app.use( express.static( `${__dirname}/../build` ) );
+app.use(express.static(`${__dirname}/../build`));
 
 app.use(bodyParser.json());
 
