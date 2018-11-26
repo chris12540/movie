@@ -99,7 +99,6 @@ class Dashboard extends Component {
 	populate = () => {
 		const { filter, page } = this.state;
 		Axios.all([this.request(filter, page), this.request(filter, page + 1)]).then(res => {
-			console.log(res)
 			let list = [...res[0].results, ...res[1].results];
 			this.setState({
 				list: list,

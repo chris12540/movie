@@ -31,6 +31,7 @@ app.post("/auth/login", authController.login);
 app.post("/auth/register", authController.register);
 app.get('/auth/me', authController.me);
 app.post('/auth/logout', authController.logout);
+app.patch('/user/:id', authController.updatePhoto);
 
 app.get('/api/lists', listController.lists);
 app.get('/api/userLists', listController.userLists);

@@ -14,8 +14,8 @@ module.exports = {
 				if (users.length) {
 					bcrypt.compare(password, users[0].password).then(passwordsMatch => {
 						if (passwordsMatch) {
-							const { name, username, profile_pic: profilePic } = users[0];
-							req.session.user = { name, username, profilePic };
+							const { id, name, username, profile_pic: profilePic } = users[0];
+							req.session.user = { id, name, username, profilePic };
 							console.log(`Added user ${username} to session: ${req.session.user.username}`)
 							res.json(req.session.user);
 						} else {
@@ -61,6 +61,17 @@ module.exports = {
 		}).catch(error => {
 			console.log('Error finding user', error);
 			res.status(500).json({ message: 'Error finding user' });
+		})
+	},
+	updatePhoto: (req, res) => {
+		const { photo } = req.body;
+		const { id } = req.params;
+		console.log(photo, id);
+		req.app.get('db').update_photo({ photo, id }).then(() => {
+			res.sendStatus(204);
+		}).catch(error => {
+			console.log('Error updating photo: ', error);
+			res.json(error);
 		})
 	}
 };

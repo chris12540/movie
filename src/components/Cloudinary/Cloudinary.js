@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone'
 import request from 'superagent'
+import Axios from 'axios';
 
 const CLOUDINARY_UPLOAD_PRESET = 'he78ntth';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/djrk8ejp8/image/upload';
@@ -30,8 +31,12 @@ class Cloudinary extends Component {
 				console.log(error);
 			}
 			if (response.body.secure_url !== '') {
-				this.setState({
-					uploadedFileCloudinaryURL: response.body.secure_url
+				Axios.get('/auth/me').then(res => {
+					Axios.patch(`/user/${res.data.id}`, { photo: response.body.secure_url }).then(res => {
+						this.setState({
+							uploadedFileCloudinaryURL: response.body.secure_url
+						})
+					})
 				})
 			}
 		})
@@ -42,7 +47,7 @@ class Cloudinary extends Component {
 			<form>
 				<div className="upload">
 					<Dropzone multiple={false} accept='image/*' onDrop={this.onImageDrop.bind(this)} uploadedFileCloudinaryURL={this.state.uploadedFileCloudinaryURL}>
-						{this.state.uploadedFile ? <p>{this.state.uploadedFile.name}</p> : <p>Click to upload</p>}
+						{this.state.uploadedFile ? <p>Updated to: {this.state.uploadedFile.name}</p> : <p>Click to upload</p>}
 					</Dropzone>
 				</div>
 			</form>
