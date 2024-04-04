@@ -1,44 +1,39 @@
 {
-  "name": "movie",
-  "version": "0.1.0",
+  "name": "movie-list",
   "private": true,
-  "main": "server/index.js",
-  "dependencies": {
-    "axios": "^0.18.0",
-    "bcrypt": "^3.0.2",
-    "body-parser": "^1.18.3",
-    "dotenv": "^6.1.0",
-    "express": "^4.16.4",
-    "express-session": "^1.15.6",
-    "lodash": "^4.17.11",
-    "massive": "^5.5.1",
-    "now": "^11.4.6",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
-    "react-dropzone": "^7.0.1",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "2.0.5",
-    "superagent": "^4.0.0-beta.5"
-  },
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "now-start": "node server/index.js",
-    "deploy": "now --public --dotenv=.env.prod -d"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
-  "now": {
-    "alias": "movielist"
+  "dependencies": {
+    "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "lodash": "^4.17.21",
+    "massive": "^6.11.2",
+    "now": "^21.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
+    "react-router-dom": "^6.22.3",
+    "superagent": "^8.1.2"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "proxy": "http://localhost:4000"
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "vite": "^5.2.0"
+  }
 }
